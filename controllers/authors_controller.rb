@@ -25,6 +25,20 @@ post 'authors/add' do
   erb(:'authors/index')
 end
 
+# edit
+
+post 'authors/edit' do
+  author = Author.find_by_id(params[:id])
+  author.update
+  erb(:'authors/')
+end
+
+get 'authors/:id/delete' do
+  @author = Author.find_by_id(params[:id])
+  erb(:'authors/delete')
+end
+
 get 'authors/:id/edit' do
-  
+  @author = Author.find_by_id(params[:id])
+  erb(:'/authors/edit')
 end

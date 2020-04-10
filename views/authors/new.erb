@@ -1,3 +1,12 @@
 <h3>CREATE NEW AUTHOR</h3>
 
-<form 
+<form action="/authors/add" method="POST">
+
+  <label>First Name:
+  <input type="text" name="first_name" placeholder="Enter First Name" required> </label>
+
+  <label>Last Name:
+    <input type="text" name="last_name" placeholder="Enter Last Name" required></label>
+
+  <input type="submit" value="Add Author"></form>
+  
