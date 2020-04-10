@@ -6,5 +6,5 @@ require_relative('controllers/books_controller')
 require_relative('controllers/publishers_controller')
 
 get '/' do
-  erb(:'authors/index')
+  redirect to ('/authors/')
 end

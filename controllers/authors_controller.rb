@@ -15,30 +15,31 @@ end
 
 # add
 
-get 'authors/new' do
+get '/authors/new' do
   erb(:'authors/new')
 end
 
-post 'authors/add' do
+post '/authors/add' do
   author = Author.new(params)
   author.save
-  erb(:'authors/index')
+  redirect to ('/authors/')
 end
 
 # edit
 
-post 'authors/edit' do
+post '/authors/edit' do
   author = Author.find_by_id(params[:id])
   author.update
-  erb(:'authors/')
+  redirect to ('/authors/')
 end
 
-get 'authors/:id/delete' do
-  @author = Author.find_by_id(params[:id])
-  erb(:'authors/delete')
+get '/authors/:id/delete' do
+  author = Author.find_by_id(params[:id])
+  author.delete
+  redirect to ('/authors/')
 end
 
-get 'authors/:id/edit' do
+get '/authors/:id/edit' do
   @author = Author.find_by_id(params[:id])
   erb(:'/authors/edit')
 end

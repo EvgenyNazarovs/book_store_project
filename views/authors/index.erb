@@ -1,10 +1,21 @@
-<p3> ALL AUTHORS</p3>
+<h3> ALL AUTHORS</h3>
+
+<% if @authors %>
 
 <% for author in @authors %>
 
-<p>Name: <%=author.name%></p>
-<p><a href="#">Edit</a></p>
-<p><a href="#">See All Books</a></p>
+<p>Name: <%=author.full_name%></p>
+<p><a href="/authors/edit">EDIT</a></p>
+<p><a href="#">SEE ALL BOOKS</a></p>
+<p><a href="/authors/<%=author.id%>/delete">DELETE</a></p>
 <hr>
+
+<%end%>
+
+<% else%>
+
+<h4>We haven't found any authors</h4>
+
+<a href="/authors/new">Add Author</a>
 
 <%end%>

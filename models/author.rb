@@ -2,14 +2,13 @@ require_relative('../db/sql_runner')
 
 class Author
 
-  attr_accessor :first_name, :last_name, :nationality
+  attr_accessor :first_name, :last_name
   attr_reader :id
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @first_name = options['first_name']
     @last_name = options['last_name']
-    @nationality = options['nationality']
   end
 
   def save
@@ -24,7 +23,7 @@ class Author
     sql = "UPDATE authors
            SET (first_name, last_name) = ($1, $2)
            WHERE id = $3"
-    values = [@first_name @last_name, @id]
+    values = [@first_name, @last_name, @id]
     SqlRunner.run(sql, values)
   end
 
@@ -44,6 +43,18 @@ class Author
     sql = "SELECT * FROM authors"
     results = SqlRunner.run(sql)
     return self.map_items(results)
+  end
+
+  def full_name
+    "#{@first_name} #{@last_name}"
+  end
+
+  def self.find_by_id(id)
+    sql = "SELECT * FROM authors
+           WHERE id = $1"
+    values = [id]
+    result = SqlRunner.run(sql, values).first
+    return Author.new(result)
   end
 
   def self.map_items(authors)

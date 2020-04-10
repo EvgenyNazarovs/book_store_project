@@ -1,3 +1,7 @@
 <p>Are you sure you want to delete the record for the following author:</p>
 
 <h4><%=@author.full_name%></h4>
+
+<form action="/authors/<%=@author.id%>/delete" method="POST">
+  <input type="submit" value="YES"></form>
+<a href="/authors/">NO</a>
